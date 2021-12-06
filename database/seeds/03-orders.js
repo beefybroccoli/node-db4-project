@@ -1,13 +1,15 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('orders').truncate()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('orders').insert([
+        {id: 1, product_id:1, quantity:5, status:"pending",user_id:1},
+        {id: 2, product_id:2, quantity:5, status:"pending",user_id:2},
+        {id: 3, product_id:3, quantity:5, status:"pending",user_id:3},
+        {id: 4, product_id:4, quantity:5, status:"pending",user_id:4},
+        {id: 5, product_id:5, quantity:5, status:"pending",user_id:5},
       ]);
     });
 };
