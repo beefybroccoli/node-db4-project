@@ -108,7 +108,7 @@ The representation **sent to the server** _could_ look like the following:
 _the migration and seeds are configured correctly
 _the db-config file is configured correctly to retrieve data from database
 
-#### milestone 02 - create five API end points for users
+#### milestone 02 - create five API end points for users (working on this branch)
 
 #### milestone 03 - create five API end points for profiles
 
