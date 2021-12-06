@@ -110,6 +110,27 @@ _the db-config file is configured correctly to retrieve data from database
 
 #### milestone 02 - create five API end points for users (working on this branch)
 
+  ##### Endpoint GET "/api/users/"
+
+  ##### Endpoint GET "/api/users/:id"
+
+  ##### Endpoint POST "/api/users/"
+
+  ##### Endpoint PUT "/api/users/:id"
+
+  ##### Endpoint DELETE "/api/users/:id"
+
+  ##### Middleware verify_user_id
+
+  ##### Middleware verify_new_user
+
+  ##### Middleware verify_unique_user
+
+  ##### Middleware verify_password_integrity
+
+  ##### Middleware 
+
+
 #### milestone 03 - create five API end points for profiles
 
 #### milestone 04 - create five API end points for products
