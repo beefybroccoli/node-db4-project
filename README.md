@@ -107,3 +107,13 @@ The representation **sent to the server** _could_ look like the following:
 #### milestone 01 - working db and correct knex configuration
 _the migration and seeds are configured correctly
 _the db-config file is configured correctly to retrieve data from database
+
+#### milestone 02 - create five API end points for users
+
+#### milestone 03 - create five API end points for profiles
+
+#### milestone 04 - create five API end points for products
+
+#### milestone 05 - create five API end points for orders
+
+#### milestone 06 - create five API end points using multiple tables
