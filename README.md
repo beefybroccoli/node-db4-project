@@ -112,13 +112,13 @@ _the db-config file is configured correctly to retrieve data from database
 
   ##### Endpoint GET **/api/users/**
 
-  ##### Endpoint GET "/api/users/:id"
+  ##### Endpoint GET **/api/users/:id**
 
-  ##### Endpoint POST "/api/users/"
+  ##### Endpoint POST **/api/users/**
 
-  ##### Endpoint PUT "/api/users/:id"
+  ##### Endpoint PUT **/api/users/:id**
 
-  ##### Endpoint DELETE "/api/users/:id"
+  ##### Endpoint DELETE **/api/users/:id**
 
   ##### Middleware verify_user_id
 
