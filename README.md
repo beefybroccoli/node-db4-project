@@ -110,7 +110,7 @@ _the db-config file is configured correctly to retrieve data from database
 
 #### milestone 02 - create five API end points for users (working on this branch)
 
-  ##### Endpoint GET '''/api/users/'''
+  ##### Endpoint GET **/api/users/**
 
   ##### Endpoint GET "/api/users/:id"
 
