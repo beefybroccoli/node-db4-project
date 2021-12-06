@@ -104,4 +104,6 @@ The representation **sent to the server** _could_ look like the following:
   ]
 }
 ```
-#### milestone 1 - working db and correct knex configuration
+#### milestone 01 - working db and correct knex configuration
+_the migration and seeds are configured correctly
+_the db-config file is configured correctly to retrieve data from database

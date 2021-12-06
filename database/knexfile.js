@@ -9,10 +9,10 @@ module.exports = {
     },
     useNullAsDefault: true,
     migration:{
-      directory: './database/migrations'
+      directory: './migrations'
     },
     seeds: {
-      directory: './database/seeds'
+      directory: './seeds'
     },
   },
 
