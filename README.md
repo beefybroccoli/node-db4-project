@@ -104,16 +104,124 @@ The representation **sent to the server** _could_ look like the following:
   ]
 }
 ```
+=======================================================================
+#### Error Code Table
+  Status Code | Description
+  --- | --- 
+  200 | request successfully processed 
+  201 | successfully created the new record
+  400 | the request could not be understood by the server
+  401 | unauthorized request from an unknown user
+  403 | unauthorized request from a known user
+  404 | the request resource is not found on the server
+  500 | unknown and/or unexpected error occured
+  503 | the server is not ready to handle this request
+
+=======================================================================
 #### milestone 01 - working db and correct knex configuration
-_the migration and seeds are configured correctly
-_the db-config file is configured correctly to retrieve data from database
+  * the migration and seeds are configured correctly
+  * the db-config file is configured correctly to retrieve data from database
 
-#### milestone 02 - create five API end points for users
+=======================================================================
+#### milestone 02 - create five API end points for users (working on this branch)
 
+  ##### Endpoint GET **/api/users/** (complete)
+
+    The sample query, GET http://localhost:9000/api/users/
+
+    Body : none;
+
+    Response : [ {"username":"user12", "password":"password1"}, ... ]
+
+  ##### Endpoint GET **/api/users/:id** (complete)
+
+    The sample query, GET http://localhost:9000/api/users/5
+
+    Body : none;
+
+    Response : [{"username":"user12", "password":"password1"}]
+
+  ##### Endpoint POST **/api/users/** (complete)
+
+    The sample query, POST http://localhost:9000/api/users/
+
+    Body : {"username":"abc@yahoo.com", "password":"tricord!!22"}
+
+    Response : [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
+
+  ##### Endpoint PUT **/api/users/:id** (complete)
+
+    The sample query, PUT http://localhost:9000/api/users/10
+
+    Body : {"username":"abc@yahoo.com", "password":"tricord!!22"}
+
+    Response : [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
+
+  ##### Endpoint DELETE **/api/users/:id** (complete)
+
+    The sample query, DELETE http://localhost:9000/api/users/10
+
+    Body : none;
+
+    Response : [{"result":"successfully deleted user id 10}]
+
+  ##### Middleware verify_params_id (complete)
+
+    The middleware verify {id} in req.params to have below properties:
+    _type of integer
+    _not null
+    _not undefined
+    _value is greater than zero
+
+  ##### Middleware verify_existing_user_with_user_id  (complete)
+
+    This middleware verify {user_id} to have below properties:
+    _type of string
+    _not null
+    _not undefined
+    _not empty string
+    _length between 5 and 20
+    
+
+  ##### Middleware verify_new_user (complete)
+
+    This middleware verify {username} to have below properties:
+    _type of string
+    _not null
+    _not undeefined
+    _not empty string
+    _length between 5 and 20
+
+    This middleware verify {password} to have below properties:
+    _type of string
+    _not null
+    _not undeefined
+    _not empty string
+    _length between 5 and 20
+
+  ##### Middleware verify_unique_user (incomplete)
+
+    This middleware verify the {username} to be unique inside the ""users"" table.
+
+  ##### Middleware verify_password_integrity (incomplete)
+
+    This middleware verify the {password} to have below properties:
+    _not null
+    _not undefined
+    _not empty string
+    _alphanumeric
+    _length between 5 and 20
+
+  ##### Middleware 
+
+===================================================================================
 #### milestone 03 - create five API end points for profiles
 
+===================================================================================
 #### milestone 04 - create five API end points for products
 
+===================================================================================
 #### milestone 05 - create five API end points for orders
 
+===================================================================================
 #### milestone 06 - create five API end points using multiple tables
