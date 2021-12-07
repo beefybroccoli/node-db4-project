@@ -161,6 +161,8 @@ The representation **sent to the server** _could_ look like the following:
 
     The sample query, DELETE http://localhost:9000/api/users/10
 
+    Body : none;
+
     Response : [{"result":"successfully deleted user id 10}]
 
   ##### Middleware verify_params_id
