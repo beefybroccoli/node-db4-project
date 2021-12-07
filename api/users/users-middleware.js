@@ -4,7 +4,7 @@ const {verifyNumber, verifyString} = require("../middleware-verify");
 async function verify_user_id(req, res, next){
     const {id} = req.params;
     console.log("typeof id = ", typeof id );
-    if(isNaN(id)){
+    if(verifyNumber(id)){
         res.status(400).json({message:`invalid id - ${id}`});
     }else{
         const array = await middlewareUsers.getById(id);

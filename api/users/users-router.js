@@ -23,7 +23,6 @@ router.get("/:id", middlewareUsers.verify_user_id, (req, res, next)=>{
 
 router.post("/", middlewareUsers.verify_new_user, async (req, res, next)=>{
   try{
-    // res.status(503).json({method:"POST",status:503,message:`reach PATH /api/users${req.path}`});
     const {username, password} = req.body;
     const new_id = await modelUsers.addUser({username, password});
     const array = await modelUsers.getById(new_id[0]);
@@ -35,7 +34,6 @@ router.post("/", middlewareUsers.verify_new_user, async (req, res, next)=>{
 
 router.put("/:id", middlewareUsers.verify_user_id, middlewareUsers.verify_new_user, async (req, res, next)=>{
   try{
-    // res.status(503).json({method:"PUT",status:503,message:`reach PATH /api/users${req.path}`});
     const {username, password} = req.body;
     const {id} = req.params;
     const result = await modelUsers.modifyUser(id, {username, password});
@@ -48,7 +46,6 @@ router.put("/:id", middlewareUsers.verify_user_id, middlewareUsers.verify_new_us
 
 router.delete("/:id", middlewareUsers.verify_user_id, async (req, res, next)=>{
   try{
-    // res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/users${req.path}`});
     const {id} = req.params;
     const result = await modelUsers.deleteUser(id);
     res.status(201).json({result, user:req.user});
