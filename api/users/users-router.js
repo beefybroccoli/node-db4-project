@@ -2,7 +2,7 @@ const express = require("express");
 const router = express();
 const model = require("./users-model");
 const errorHandler = require("../errorhandler");
-const middleware = require("./users-middleware");
+const middlewareUsers = require("./users-middleware");
 
 router.get("/", async (req , res, next)=>{
     try{
@@ -13,7 +13,7 @@ router.get("/", async (req , res, next)=>{
     }
 })
 
-router.get("/:id", middleware.verify_user_id, (req, res, next)=>{
+router.get("/:id", middlewareUsers.verify_user_id, (req, res, next)=>{
   try{
     res.status(200).json(req.user);
   }catch(err){
@@ -37,7 +37,7 @@ router.put("/:id", async (req, res, next)=>{
   }
 });
 
-router.delete("/:id", middleware.verify_user_id, async (req, res, next)=>{
+router.delete("/:id", middlewareUsers.verify_user_id, async (req, res, next)=>{
   try{
     // res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/users${req.path}`});
     const {id} = req.params;
