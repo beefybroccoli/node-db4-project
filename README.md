@@ -131,11 +131,15 @@ The representation **sent to the server** _could_ look like the following:
 
     Body : none;
 
+    Response : [ {"username":"user12", "password":"password1"}, ... ]
+
   ##### Endpoint GET **/api/users/:id**
 
     The sample query, GET http://localhost:9000/api/users/5
 
     Body : none;
+
+    Response : [{"username":"user12", "password":"password1"}]
 
   ##### Endpoint POST **/api/users/**
 
@@ -143,15 +147,21 @@ The representation **sent to the server** _could_ look like the following:
 
     Body : {"username":"abc@yahoo.com", "password":"tricord!!22"}
 
+    Response : [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
+
   ##### Endpoint PUT **/api/users/:id**
 
     The sample query, PUT http://localhost:9000/api/users/10
 
     Body : {"username":"abc@yahoo.com", "password":"tricord!!22"}
 
+    Response : [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
+
   ##### Endpoint DELETE **/api/users/:id**
 
     The sample query, DELETE http://localhost:9000/api/users/10
+
+    Response : [{"result":"successfully deleted user id 10}]
 
   ##### Middleware verify_params_id
 
