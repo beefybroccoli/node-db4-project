@@ -18,4 +18,13 @@ function verifyNumber(input){
     }
 }
 
-module.exports = {verifyString, verifyNumber};
+//verify the length of a string between min and max
+function verifyStringLength(min, max, inputStr){
+    if(inputStr.length < min || inputStr.length > max){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+module.exports = {verifyString, verifyNumber, verifyStringLength};
