@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express();
 const model = require("./users-model");
+const errorHandler = require("../errorhandler");
 
 router.get("/", async (req , res, next)=>{
     try{
@@ -11,13 +12,39 @@ router.get("/", async (req , res, next)=>{
     }
 })
 
-router.use((err, req, res, next) => { // eslint-disable-line
-    res.status(err.status || 500).json({
-      sageAdvice: 'Finding the real error is 90% of the bug fix',
-      message: err.message,
-      stack: err.stack,
-    })
-  })
+router.get("/:id", async (req, res, next)=>{
+  try{
+    res.status(503).json({method:"GET",status:503,message:`reach PATH /api/users${req.path}`});
+  }catch(err){
+    next(err);
+  }
+})
+
+router.post("/", async (req, res, next)=>{
+  try{
+    res.status(503).json({method:"POST",status:503,message:`reach PATH /api/users${req.path}`});
+  }catch(err){
+    next(err);
+  }
+});
+
+router.put("/:id", async (req, res, next)=>{
+  try{
+    res.status(503).json({method:"PUT",status:503,message:`reach PATH /api/users${req.path}`});
+  }catch(err){
+    next(err);
+  }
+});
+
+router.delete("/:id", async (req, res, next)=>{
+  try{
+    res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/users${req.path}`});
+  }catch(err){
+    next(err);
+  }
+})
+
+router.use(errorHandler);
   
 
 module.exports = router;
