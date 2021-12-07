@@ -6,7 +6,6 @@ async function verify_user_id(req, res, next){
     if(isNaN(id)){
         res.status(400).json({message:`invalid id - ${id}`});
     }else{
-
         const array = await modelUsers.getById(id);
         console.log("array = ", array);
 

@@ -11,7 +11,7 @@ function verifyString(input){
 //verify the input is not null, not undefined
 //verify the input is a type of number
 function verifyNumber(input){
-    if(input === null || input === undefined || typeof input !== "number"){
+    if(input === null || input === undefined || isNaN(input) === false){
         return false;
     }else{
         return true;

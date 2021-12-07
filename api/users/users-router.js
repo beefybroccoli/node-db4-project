@@ -13,9 +13,8 @@ router.get("/", async (req , res, next)=>{
     }
 })
 
-router.get("/:id", middleware.verify_user_id, async (req, res, next)=>{
+router.get("/:id", middleware.verify_user_id, (req, res, next)=>{
   try{
-    // res.status(503).json({method:"GET",status:503,message:`reach PATH /api/users${req.path}`});
     res.status(200).json(req.result);
   }catch(err){
     next(err);
