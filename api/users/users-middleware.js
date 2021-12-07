@@ -8,7 +8,6 @@ async function verify_user_id(req, res, next){
         res.status(400).json({message:`invalid id - ${id}`});
     }else{
         const array = await middlewareUsers.getById(id);
-        // console.log("array = ", array);
 
         if (array.length === 0){
             res.status(404).json({message:`id ${id} not found`});
