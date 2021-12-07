@@ -30,19 +30,11 @@ async function verify_new_user(req, res, next){
 }
 
 async function verify_unique_user(req, res, next){
-    if (true){
+    if (false){
 
     }else{
         next();
     }
 }
 
-async function verify_existing_user(req, res, next){
-    if (true){
-
-    }else{
-        next();
-    }
-}
-
-module.exports = {verify_existing_user,verify_new_user, verify_unique_user,verify_user_id};
+module.exports = {verify_new_user, verify_unique_user,verify_user_id};
