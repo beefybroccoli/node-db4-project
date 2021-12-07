@@ -35,6 +35,10 @@ router.put("/:id", async (req, res, next)=>{
   }
 });
 
+router.use("*", (req, res)=>{
+    res.status(404).json({message:`invalid path /api/orders${req.path}`});
+  })
+
 router.delete("/:id", async (req, res, next)=>{
   try{
     res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/orders${req.path}`});

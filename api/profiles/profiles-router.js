@@ -43,6 +43,10 @@ router.delete("/:id", async (req, res, next)=>{
   }
 })
 
+router.use("*", (req, res)=>{
+    res.status(404).json({message:`invalid path /api/profiles${req.path}`});
+  })
+
 router.use(errorHandler);
   
 module.exports = router;
