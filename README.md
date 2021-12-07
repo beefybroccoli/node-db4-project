@@ -125,7 +125,7 @@ The representation **sent to the server** _could_ look like the following:
 =======================================================================
 #### milestone 02 - create five API end points for users (working on this branch)
 
-  ##### Endpoint GET **/api/users/**
+  ##### Endpoint GET **/api/users/** (complete)
 
     The sample query, GET http://localhost:9000/api/users/
 
@@ -133,7 +133,7 @@ The representation **sent to the server** _could_ look like the following:
 
     Response : [ {"username":"user12", "password":"password1"}, ... ]
 
-  ##### Endpoint GET **/api/users/:id**
+  ##### Endpoint GET **/api/users/:id** (complete)
 
     The sample query, GET http://localhost:9000/api/users/5
 
@@ -141,7 +141,7 @@ The representation **sent to the server** _could_ look like the following:
 
     Response : [{"username":"user12", "password":"password1"}]
 
-  ##### Endpoint POST **/api/users/**
+  ##### Endpoint POST **/api/users/** (complete)
 
     The sample query, POST http://localhost:9000/api/users/
 
@@ -149,7 +149,7 @@ The representation **sent to the server** _could_ look like the following:
 
     Response : [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
 
-  ##### Endpoint PUT **/api/users/:id**
+  ##### Endpoint PUT **/api/users/:id** (complete)
 
     The sample query, PUT http://localhost:9000/api/users/10
 
@@ -157,7 +157,7 @@ The representation **sent to the server** _could_ look like the following:
 
     Response : [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
 
-  ##### Endpoint DELETE **/api/users/:id**
+  ##### Endpoint DELETE **/api/users/:id** (complete)
 
     The sample query, DELETE http://localhost:9000/api/users/10
 
@@ -165,7 +165,7 @@ The representation **sent to the server** _could_ look like the following:
 
     Response : [{"result":"successfully deleted user id 10}]
 
-  ##### Middleware verify_params_id
+  ##### Middleware verify_params_id (complete)
 
     The middleware verify {id} in req.params to have below properties:
     _type of integer
@@ -173,7 +173,7 @@ The representation **sent to the server** _could_ look like the following:
     _not undefined
     _value is greater than zero
 
-  ##### Middleware verify_existing_user_with_user_id
+  ##### Middleware verify_existing_user_with_user_id  (complete)
 
     This middleware verify {user_id} to have below properties:
     _type of string
@@ -183,7 +183,7 @@ The representation **sent to the server** _could_ look like the following:
     _length between 5 and 20
     
 
-  ##### Middleware verify_new_user
+  ##### Middleware verify_new_user (complete)
 
     This middleware verify {username} to have below properties:
     _type of string
@@ -199,11 +199,11 @@ The representation **sent to the server** _could_ look like the following:
     _not empty string
     _length between 5 and 20
 
-  ##### Middleware verify_unique_user
+  ##### Middleware verify_unique_user (incomplete)
 
     This middleware verify the {username} to be unique inside the ""users"" table.
 
-  ##### Middleware verify_password_integrity
+  ##### Middleware verify_password_integrity (incomplete)
 
     This middleware verify the {password} to have below properties:
     _not null
