@@ -110,9 +110,9 @@ The representation **sent to the server** _could_ look like the following:
   --- | --- 
   200 | request successfully processed 
   201 | successfully created the new record
-  400 | the request could not be understood by the due
-  401 | unauthorized request for a unknown user
-  403 | unauthorized request for a known user
+  400 | the request could not be understood by the server
+  401 | unauthorized request from an unknown user
+  403 | unauthorized request from a known user
   404 | the request resource is not found on the server
   500 | unknown and/or unexpected error occured
   503 | the server is not ready to handle this request
