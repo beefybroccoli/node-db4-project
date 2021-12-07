@@ -17,7 +17,7 @@ async function modifyUser(id, user){
 }
 
 async function deleteUser(id){
-
+    return await db('users').where('id', id).del();
 }
 
 module.exports = {getAll, getById, addUser,modifyUser,deleteUser};

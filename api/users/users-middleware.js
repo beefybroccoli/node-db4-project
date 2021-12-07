@@ -12,7 +12,7 @@ async function verify_user_id(req, res, next){
         if (array.length === 0){
             res.status(404).json({message:`id ${id} not found`});
         }else{
-            req.result = array[0];
+            req.user = array[0];
             next();
         }
     }
