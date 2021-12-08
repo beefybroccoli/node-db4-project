@@ -1,5 +1,6 @@
 const modelProfiles = require("./profiles-model");
 const {verifyNumber, verifyString, verifyEmptyArray, verifyStringLength, verifyUserType} = require("../middleware-verify");
+const modelUsers = require("../users/users-model");
 
 async function verifyProfileId(req, res, next) {
     const {id} = req.params;
@@ -13,6 +14,17 @@ async function verifyProfileId(req, res, next) {
             req.profile = array[0];
             next();
         }
+    }
+}
+
+async function verify_user_id(req, res, next){
+    const {user_id} = req.body;
+    const array = await modelUsers.getById(user_id);
+
+    if (verifyEmptyArray(array)){
+        res.status(404).json({message:`user_id ${user_id} not found`});
+    }else{
+        next();
     }
 }
 
@@ -36,4 +48,4 @@ async function verifyNewProfile(req, res, next) {
     
 }
 
-module.exports = {verifyProfileId,verifyNewProfile};
+module.exports = {verifyProfileId,verifyNewProfile, verify_user_id};

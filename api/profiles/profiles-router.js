@@ -24,7 +24,7 @@ router.get("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
   }
 })
 
-router.post("/", middlewareProfiles.verifyNewProfile, async (req, res, next)=>{
+router.post("/", middlewareProfiles.verifyNewProfile, middlewareProfiles.verify_user_id, async (req, res, next)=>{
   try{
     // res.status(503).json({method:"POST",status:503,message:`reach PATH /api/profiles${req.path}`});
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
@@ -37,7 +37,7 @@ router.post("/", middlewareProfiles.verifyNewProfile, async (req, res, next)=>{
   }
 });
 
-router.put("/:id", middlewareProfiles.verifyProfileId, middlewareProfiles.verifyNewProfile, async (req, res, next)=>{
+router.put("/:id", middlewareProfiles.verifyProfileId, middlewareProfiles.verifyNewProfile, middlewareProfiles.verify_user_id, async (req, res, next)=>{
   try{
     // res.status(503).json({method:"PUT",status:503,message:`reach PATH /api/profiles${req.path}`});
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
