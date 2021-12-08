@@ -2,9 +2,9 @@ const express = require("express");
 const router = express();
 const errorHandler = require("../errorhandler");
 const modelOrders = require("./orders-model");
-const middlewareOrders = require("./orders-middleware");
-const middlewareProducts = require("../products/products-middleware");
-const middlewareUsers = require("../users/users-middleware");
+const {verify_order_id, verify_new_order} = require("./orders-middleware");
+const {verify_product_id} = require("../products/products-middleware");
+const {verify_user_id} = require("../users/users-middleware");
 
 router.get("/", async (req, res, next)=>{
     try{
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next)=>{
     }
   })
 
-router.get("/:id", middlewareOrders.verify_order_id, async (req, res, next)=>{
+router.get("/:id", verify_order_id, async (req, res, next)=>{
   try{
     const {id} = req.params;
     const array = await modelOrders.getOrderById(id);
@@ -25,7 +25,7 @@ router.get("/:id", middlewareOrders.verify_order_id, async (req, res, next)=>{
   }
 })
 
-router.post("/", middlewareOrders.verify_new_order, middlewareProducts.verify_product_id, middlewareUsers.verify_user_id, async (req, res, next)=>{
+router.post("/", verify_new_order, verify_product_id, verify_user_id, async (req, res, next)=>{
   try{
     const {order_number, product_id, quantity, status, user_id} = req.body;
     const array = await modelOrders.addOrder({order_number, product_id, quantity, status, user_id});
@@ -37,7 +37,7 @@ router.post("/", middlewareOrders.verify_new_order, middlewareProducts.verify_pr
   }
 });
 
-router.put("/:id", middlewareOrders.verify_order_id, middlewareOrders.verify_new_order, middlewareProducts.verify_product_id, middlewareUsers.verify_user_id, async (req, res, next)=>{
+router.put("/:id", verify_order_id, verify_new_order, verify_product_id, verify_user_id, async (req, res, next)=>{
   try{
     const {id} = req.params;
     const {order_number, product_id, quantity, status, user_id} = req.body;
@@ -49,7 +49,7 @@ router.put("/:id", middlewareOrders.verify_order_id, middlewareOrders.verify_new
   }
 });
 
-router.delete("/:id", middlewareOrders.verify_order_id, async (req, res, next)=>{
+router.delete("/:id", verify_order_id, async (req, res, next)=>{
   try{
     const {id} = req.params;
     const result = await modelOrders.removeOrder(id);
