@@ -11,7 +11,7 @@ function verifyString(input){
 //verify the input is not null, not undefined
 //verify the input is a type of number
 function verifyNumber(input){
-    if(input === null || input === undefined || isNaN(input) === false){
+    if(input === null || input === undefined || isNaN(input) === true){
         return false;
     }else{
         return true;
@@ -27,4 +27,14 @@ function verifyStringLength(min, max, inputStr){
     }
 }
 
-module.exports = {verifyString, verifyNumber, verifyStringLength};
+function verifyEmptyArray (array){
+    return  array.length === 0;
+}
+
+function verifyUserType(user_type){
+    return (user_type === "admin" || user_type === "user");
+}
+
+
+
+module.exports = {verifyString, verifyNumber, verifyStringLength, verifyEmptyArray, verifyUserType};

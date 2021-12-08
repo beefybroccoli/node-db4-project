@@ -131,7 +131,8 @@ The representation **sent to the server** _could_ look like the following:
 
     Body : none;
 
-    Response : [ {"username":"user12", "password":"password1"}, ... ]
+    Response : 
+      [ {"username":"user12", "password":"password1"}, ... ]
 
   ##### Endpoint GET **/api/users/:id** (complete)
 
@@ -139,23 +140,28 @@ The representation **sent to the server** _could_ look like the following:
 
     Body : none;
 
-    Response : [{"username":"user12", "password":"password1"}]
+    Response : 
+      [{"username":"user12", "password":"password1"}]
 
   ##### Endpoint POST **/api/users/** (complete)
 
     The sample query, POST http://localhost:9000/api/users/
 
-    Body : {"username":"abc@yahoo.com", "password":"tricord!!22"}
+    Body : 
+      {"username":"abc@yahoo.com", "password":"tricord!!22"}
 
-    Response : [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
+    Response : 
+      [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
 
   ##### Endpoint PUT **/api/users/:id** (complete)
 
     The sample query, PUT http://localhost:9000/api/users/10
 
-    Body : {"username":"abc@yahoo.com", "password":"tricord!!22"}
+    Body : 
+      {"username":"abc@yahoo.com", "password":"tricord!!22"}
 
-    Response : [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
+    Response : 
+      [{"username":"abc@yahoo.com", "password":"tricord!!22"}]
 
   ##### Endpoint DELETE **/api/users/:id** (complete)
 
@@ -163,7 +169,8 @@ The representation **sent to the server** _could_ look like the following:
 
     Body : none;
 
-    Response : [{"result":"successfully deleted user id 10}]
+    Response : 
+      [{"result":"successfully deleted user id 10}]
 
   ##### Middleware verify_params_id (complete)
 
@@ -217,8 +224,153 @@ The representation **sent to the server** _could_ look like the following:
 ===================================================================================
 #### milestone 03 - create five API end points for profiles
 
+  ##### Endpoint GET **/api/profiles/**
+
+    The sample query, GET http://localhost:9000/api/profiles/
+
+    Body : none;
+
+    Response :  
+      [ 
+        {
+          "email": "masonjohn@mail.com",
+          "first_name": "mason",
+          "id": 3,
+          "last_name": "john",
+          "middle_name": "",
+          "user_id": 3,
+          "user_type": "user"
+        },
+        {
+          "email": "noobplayer@mail.com",
+          "first_name": "noob",
+          "id": 4,
+          "last_name": "player",
+          "middle_name": "",
+          "user_id": 4,
+          "user_type": "user"
+        },
+        ...
+    ]
+
+
+  ##### Endpoint GET **/api/profiles/:id**
+
+    The sample query, GET http://localhost:9000/api/profiles/3
+
+    Body : none;
+
+    Response :  
+      [ 
+        {
+          "email": "masonjohn@mail.com",
+          "first_name": "mason",
+          "id": 3,
+          "last_name": "john",
+          "middle_name": "",
+          "user_id": 3,
+          "user_type": "user"
+        }
+      ]
+
+  ##### Endpoint POST **/api/profiles/**
+
+    The sample query, POST http://localhost:9000/api/profiles/
+
+    Body :
+      {
+          "email": "mason3@mail.com",
+          "first_name": "mason3",
+          "last_name": "mason3",
+          "middle_name": "c",
+          "user_id": 4,
+          "user_type": "user"
+      }
+
+    Response :
+      {
+        "newProfile": {
+            "email": "mason3@mail.com",
+            "first_name": "mason3",
+            "id": 11,
+            "last_name": "mason3",
+            "middle_name": "c",
+            "user_id": 4,
+            "user_type": "user"
+        },
+        "result": 1
+      }
+
+
+  ##### Endpoint PUT **/api/profiles/**
+
+    The sample query, PUT http://localhost:9000/api/profiles/
+
+    Body :
+      {
+          "email": "mason3@mail.com",
+          "first_name": "mason3",
+          "id": 10,
+          "last_name": "mason3",
+          "middle_name": "c",
+          "user_id": 4,
+          "user_type": "user"
+      }
+
+    Response:
+      {
+      "modifiedProfile": {
+          "email": "mason3@mail.com",
+          "first_name": "mason3",
+          "id": 10,
+          "last_name": "mason3",
+          "middle_name": "c",
+          "user_id": 4,
+          "user_type": "user"
+      },
+      "result": 1
+    }
+
+
+  ##### Endpoint DELETE **/api/profiles/:id**
+
+    The sample query, DELETE http://localhost:9000/api/profiles/11
+
+    Body : none;
+
+    Reponse :
+      {
+        "deletedProfile": {
+            "email": "mason3@mail.com",
+            "first_name": "mason3",
+            "id": 11,
+            "last_name": "mason3",
+            "middle_name": "c",
+            "user_id": 4,
+            "user_type": "user"
+        },
+        "result": 1
+    }
+
+
+
+
+  ##### Middleware verify_profile_id
+
+    verify the {id} exists in the **profiles** table.
+
+  ##### Middleware verify_new_profile
+
+    verify the {first_name, last_name, middle_name, email, user_type, user_id} is valid
+
+  ##### Middleware verify_user_id
+
+    verify the {user_id} exist in the the **users** table.
+
 ===================================================================================
 #### milestone 04 - create five API end points for products
+
+
 
 ===================================================================================
 #### milestone 05 - create five API end points for orders

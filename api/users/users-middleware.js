@@ -3,7 +3,7 @@ const {verifyNumber, verifyString, verifyStringLength} = require("../middleware-
 
 async function verify_user_id(req, res, next){
     const {id} = req.params;
-    if(verifyNumber(id)){
+    if(!verifyNumber(id)){
         res.status(400).json({message:`invalid id - ${id}`});
     }else{
         const array = await middlewareUsers.getById(id);
