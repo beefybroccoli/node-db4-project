@@ -11,7 +11,7 @@ async function verify_user_id(req, res, next){
         if (array.length === 0){
             res.status(404).json({message:`user id ${user_id} not found`});
         }else{
-            req.user = array[0];
+            req.user = array;
             next();
         }
     }
