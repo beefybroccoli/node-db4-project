@@ -2,7 +2,7 @@ const express = require("express");
 const router = express();
 const modelProducts = require("./products-model");
 const errorHandler = require("../errorhandler");
-const middlewareProducts = require("./products-middleware");
+const {verify_new_product, verify_product_id} = require("./products-middleware");
 
 router.get("/", async (req, res, next)=>{
     try{
@@ -13,7 +13,7 @@ router.get("/", async (req, res, next)=>{
     }
   })
 
-router.get("/:id", middlewareProducts.verify_product_id, async (req, res, next)=>{
+router.get("/:id", verify_product_id, async (req, res, next)=>{
   try{
       res.status(200).json(req.array);
   }catch(err){
@@ -21,7 +21,7 @@ router.get("/:id", middlewareProducts.verify_product_id, async (req, res, next)=
   }
 })
 
-router.post("/", middlewareProducts.verify_new_product, async (req, res, next)=>{
+router.post("/", verify_new_product, async (req, res, next)=>{
   try{
     const {name, description, price} = req.body;
     const array = await modelProducts.addProduct({name, description, price});
@@ -33,7 +33,7 @@ router.post("/", middlewareProducts.verify_new_product, async (req, res, next)=>
   }
 });
 
-router.put("/:id", middlewareProducts.verify_product_id, middlewareProducts.verify_new_product, async (req, res, next)=>{
+router.put("/:id", verify_product_id, verify_new_product, async (req, res, next)=>{
   try{
     const {name, description, price} = req.body;
     const {id} = req.params;
@@ -45,7 +45,7 @@ router.put("/:id", middlewareProducts.verify_product_id, middlewareProducts.veri
   }
 });
 
-router.delete("/:id", middlewareProducts.verify_product_id, async (req, res, next)=>{
+router.delete("/:id", verify_product_id, async (req, res, next)=>{
   try{
     const {id} = req.params;
     const result = await modelProducts.removeProduct(id);
