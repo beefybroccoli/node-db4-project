@@ -28,7 +28,11 @@ function verifyStringLength(min, max, inputStr){
 }
 
 function verifyEmptyArray (array){
-    return  array.length === 0;
+    if(array === undefined || array === null || !Array.isArray(array)){
+        return false;
+    }else{
+        return  array.length === 0;
+    }
 }
 
 function verifyUserType(user_type){
