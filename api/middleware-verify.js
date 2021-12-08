@@ -39,6 +39,4 @@ function verifyOrderStatus(order_status){
     return (order_status === "pending" || order_status === "shipped" || order_status === "delievered");
 }
 
-
-
 module.exports = {verifyString, verifyNumber, verifyStringLength, verifyEmptyArray, verifyUserType, verifyOrderStatus};

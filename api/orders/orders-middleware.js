@@ -1,5 +1,5 @@
 const modelOrders = require("./orders-model");
-const {verifyEmptyArray, verifyString, verifyNumber,verifyOrderStatus} = require("../middleware-verify");
+const {verifyEmptyArray, verifyString, verifyNumber, verifyOrderStatus} = require("../middleware-verify");
 
 async function verify_order_id (req, res, next){
     const {id} = req.params;
@@ -18,19 +18,24 @@ async function verify_order_id (req, res, next){
 
 async function verify_new_order(req, res,next){
     const {order_number, product_id, quantity, status, user_id} = req.body;
+    const message = {err:""};
     if(!verifyNumber(order_number)){
-        res.status(400).json({message:`invalid order_id, must be non-negative number`})
+        message.err = `invalid order_id, must be non-negative number`;
     }else if(!verifyNumber(product_id)){
-        res.status(400).json({message:`invalid product_id, must be non-negative number`})
+        message.err = `invalid product_id, must be non-negative number`;
     }else if(!verifyNumber(quantity)){
-        res.status(400).json({message:`invalid order_id, must be non-negative number`})
+        message.err = `invalid quantity, must be non-negative number`;
     }else if(!verifyNumber(user_id)){
-        res.status(400).json({message:`invalid user_id, must be non-negative number`})
+        message.err = `invalid user_id, must be non-negative number`;
     }else if(!verifyString(status) || !verifyOrderStatus(status)){
-        res.status(400).json({message:`invalid status, must be pending, shipped or delievered`});
+        message.err = `invalid status, must be pending, shipped or delievered`;
+    }   
+
+    if (message.err = ""){
+        res.status(400).json({message:message.err});
     }else{
         next();
-    }   
+    }
 }
 
 module.exports ={verify_order_id, verify_new_order};
