@@ -4,6 +4,7 @@ const model = require("./profiles-model");
 const errorHandler = require("../errorhandler");
 const modelProiles = require("./profiles-model");
 const middlewareProfiles = require("./profiles-middleware");
+const middlewareUsers = require("../users/users-middleware");
 
 router.get("/", async (req, res, next)=>{
     try{
@@ -22,9 +23,8 @@ router.get("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
   }
 })
 
-router.post("/", middlewareProfiles.verifyNewProfile, middlewareProfiles.verify_user_id, async (req, res, next)=>{
+router.post("/", middlewareProfiles.verifyNewProfile, middlewareUsers.verify_user_id, async (req, res, next)=>{
   try{
-    // res.status(503).json({method:"POST",status:503,message:`reach PATH /api/profiles${req.path}`});
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
     const array = await modelProiles.addProfile({first_name, middle_name, last_name, email, user_type, user_id});
     const new_profile_id = array[0];
@@ -35,9 +35,8 @@ router.post("/", middlewareProfiles.verifyNewProfile, middlewareProfiles.verify_
   }
 });
 
-router.put("/:id", middlewareProfiles.verifyProfileId, middlewareProfiles.verifyNewProfile, middlewareProfiles.verify_user_id, async (req, res, next)=>{
+router.put("/:id", middlewareProfiles.verifyProfileId, middlewareProfiles.verifyNewProfile, middlewareUsers.verify_user_id, async (req, res, next)=>{
   try{
-    // res.status(503).json({method:"PUT",status:503,message:`reach PATH /api/profiles${req.path}`});
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
     const {id} = req.params;
     const result = await modelProiles.modifyProfile(id, {first_name, middle_name, last_name, email, user_type, user_id});

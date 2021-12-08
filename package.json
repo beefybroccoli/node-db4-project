@@ -9,7 +9,7 @@
     "seed":"knex seed:run",
     "resetdb":"npm run rollback && npm run migrate && npm run seed",
     "push":"git add . && git commit -m '...' && git push origin main",
-    "push4":"git add . && git commit -m '...' && git push origin milestone-04"
+    "push5":"git add . && git commit -m '...' && git push origin milestone-05"
   },
   "repository": {
     "type": "git",

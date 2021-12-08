@@ -3,13 +3,13 @@ const {verifyNumber, verifyString, verifyEmptyArray, verifyStringLength, verifyU
 const modelUsers = require("../users/users-model");
 
 async function verifyProfileId(req, res, next) {
-    const {id} = req.params;
-    if (!verifyNumber(id)){
-        res.status(400).json({message:`invalid id ${id}`});
+    const profile_id = req.body.profile_id ? req.body.profile_id : req.params.id ;
+    if (!verifyNumber(profile_id)){
+        res.status(400).json({message:`invalid profile id ${profile_id}`});
     }else{
-        const array = await modelProfiles.getById(id);
+        const array = await modelProfiles.getById(profile_id);
         if(verifyEmptyArray(array)){
-            res.status(400).json({message:`id ${id} not found`});
+            res.status(400).json({message:`profile id ${profile_id} not found`});
         }else{
             req.array = array;
             next();
@@ -17,16 +17,17 @@ async function verifyProfileId(req, res, next) {
     }
 }
 
-async function verify_user_id(req, res, next){
-    const {user_id} = req.body;
-    const array = await modelUsers.getById(user_id);
+//--------------pending delete-----------------------------------
+// async function verify_user_id(req, res, next){
+//     const {user_id} = req.body;
+//     const array = await modelUsers.getById(user_id);
 
-    if (verifyEmptyArray(array)){
-        res.status(404).json({message:`user_id ${user_id} not found`});
-    }else{
-        next();
-    }
-}
+//     if (verifyEmptyArray(array)){
+//         res.status(404).json({message:`user_id ${user_id} not found`});
+//     }else{
+//         next();
+//     }
+// }
 
 async function verifyNewProfile(req, res, next) {
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
@@ -48,4 +49,4 @@ async function verifyNewProfile(req, res, next) {
     
 }
 
-module.exports = {verifyProfileId,verifyNewProfile, verify_user_id};
+module.exports = {verifyProfileId,verifyNewProfile};

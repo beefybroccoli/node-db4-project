@@ -11,7 +11,7 @@ function verifyString(input){
 //verify the input is not null, not undefined
 //verify the input is a type of number
 function verifyNumber(input){
-    if(input === null || input === undefined || isNaN(input) === true){
+    if(input === null || input === undefined || isNaN(input) === true || input < 0){
         return false;
     }else{
         return true;
@@ -35,6 +35,10 @@ function verifyUserType(user_type){
     return (user_type === "admin" || user_type === "user");
 }
 
+function verifyOrderStatus(order_status){
+    return (order_status === "pending" || order_status === "shipped" || order_status === "delievered");
+}
 
 
-module.exports = {verifyString, verifyNumber, verifyStringLength, verifyEmptyArray, verifyUserType};
+
+module.exports = {verifyString, verifyNumber, verifyStringLength, verifyEmptyArray, verifyUserType, verifyOrderStatus};

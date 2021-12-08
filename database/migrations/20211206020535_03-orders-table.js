@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     return knex.schema
         .createTable("orders", table=>{
             table.increments("id");
+            table.integer("order_number").notNull();
             table.integer("product_id").notNull();
             table.integer("quantity").notNull();
             table.string("status").notNull();

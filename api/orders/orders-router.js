@@ -2,49 +2,66 @@ const express = require("express");
 const router = express();
 const model = require("./orders-model");
 const errorHandler = require("../errorhandler");
+const modelOrders = require("./orders-model");
+const middlewareOrders = require("./orders-middleware");
+const middlewareProducts = require("../products/products-middleware");
+const middlewareUsers = require("../users/users-middleware");
 
 router.get("/", async (req, res, next)=>{
     try{
-      res.status(503).json({method:"GET",status:503,message:`reach PATH /api/orders${req.path}`});
+      const array = await modelOrders.getOrders();
+      res.status(200).json(array);
     }catch(err){
       next(err);
     }
   })
 
-router.get("/:id", async (req, res, next)=>{
+router.get("/:id", middlewareOrders.verify_order_id, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"GET",status:503,message:`reach PATH /api/orders${req.path}`});
+    const {id} = req.params;
+    const array = await modelOrders.getOrderById(id);
+      res.status(200).json(array);
   }catch(err){
     next(err);
   }
 })
 
-router.post("/", async (req, res, next)=>{
+router.post("/", middlewareOrders.verify_new_order, middlewareProducts.verify_product_id, middlewareUsers.verify_user_id, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"POST",status:503,message:`reach PATH /api/orders${req.path}`});
+    const {order_number, product_id, quantity, status, user_id} = req.body;
+    const array = await modelOrders.addOrder({order_number, product_id, quantity, status, user_id});
+    const new_order_id = array[0];
+    const new_order = await modelOrders.getOrderById(new_order_id);
+    res.status(201).json({result:1, newOrder:new_order[0]});
   }catch(err){
     next(err);
   }
 });
 
-router.put("/:id", async (req, res, next)=>{
+router.put("/:id", middlewareOrders.verify_order_id, middlewareOrders.verify_new_order, middlewareProducts.verify_product_id, middlewareUsers.verify_user_id, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"PUT",status:503,message:`reach PATH /api/orders${req.path}`});
+    const {id} = req.params;
+    const {order_number, product_id, quantity, status, user_id} = req.body;
+    const result = await modelOrders.modifyOrder(id, {order_number, product_id, quantity, status, user_id});
+    const modifiedOrder = await modelOrders.getOrderById(id);
+    res.status(201).json({result, modifiedOrder:modifiedOrder[0]});
   }catch(err){
     next(err);
   }
 });
+
+router.delete("/:id", middlewareOrders.verify_order_id, async (req, res, next)=>{
+  try{
+    const {id} = req.params;
+    const result = await modelOrders.removeOrder(id);
+    res.status(201).json({result, deletedOrder:req.array[0]});
+  }catch(err){
+    next(err);
+  }
+})
 
 router.use("*", (req, res)=>{
-    res.status(404).json({message:`invalid path /api/orders${req.path}`});
-  })
-
-router.delete("/:id", async (req, res, next)=>{
-  try{
-    res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/orders${req.path}`});
-  }catch(err){
-    next(err);
-  }
+  res.status(404).json({message:`invalid path /api/orders${req.path}`});
 })
 
 router.use(errorHandler);
