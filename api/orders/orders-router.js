@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express();
-const model = require("./orders-model");
 const errorHandler = require("../errorhandler");
 const modelOrders = require("./orders-model");
 const middlewareOrders = require("./orders-middleware");
