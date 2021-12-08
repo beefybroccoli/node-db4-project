@@ -2,14 +2,14 @@ const middlewareUsers = require("./users-model");
 const {verifyNumber, verifyString, verifyStringLength} = require("../middleware-verify");
 
 async function verify_user_id(req, res, next){
-    const {id} = req.params;
-    if(!verifyNumber(id)){
-        res.status(400).json({message:`invalid id - ${id}`});
+    const user_id = req.body.user_id? req.body.user_id : req.params.id;
+    if(!verifyNumber(user_id)){
+        res.status(400).json({message:`invalid user id - ${user_id}`});
     }else{
-        const array = await middlewareUsers.getById(id);
+        const array = await middlewareUsers.getById(user_id);
 
         if (array.length === 0){
-            res.status(404).json({message:`id ${id} not found`});
+            res.status(404).json({message:`user id ${user_id} not found`});
         }else{
             req.user = array[0];
             next();

@@ -2,13 +2,14 @@ const modelProducts = require("./products-model");
 const {verifyNumber, verifyString, verifyStringLength, verifyEmptyArray} = require("../middleware-verify");
 
 async function verify_product_id(req, res, next){
-    const {id} = req.params;
-    if (!verifyNumber(id)){
-        res.status(400).json({message:`invalid product id ${id}`});
+    // const {id: product_id} = req.params;
+    const product_id = req.body.product_id ? req.body.product_id : req.params.id  ;
+    if (!verifyNumber(product_id)){
+        res.status(400).json({message:`invalid product id ${product_id}`});
     }else{
-        const array = await modelProducts.getById(id);
+        const array = await modelProducts.getById(product_id);
         if(verifyEmptyArray(array)){
-            res.status(400).json({message:`product id ${id} not found`});
+            res.status(400).json({message:`product id ${product_id} not found`});
         }else{
             req.array = array;
             next();
