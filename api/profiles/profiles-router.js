@@ -49,7 +49,6 @@ router.put("/:id", middlewareProfiles.verifyProfileId, middlewareProfiles.verify
 
 router.delete("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
   try{
-    // res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/profiles${req.path}`});
     const {id} = req.params;
     const result = await modelProiles.deleteProfile(id);
     res.status(200).json({result, deletedProfile:req.array[0]});

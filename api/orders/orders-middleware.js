@@ -13,7 +13,6 @@ async function verify_order_id (req, res, next){
             req.array = array;
             next();
         }
-
     }
 }
 
@@ -28,7 +27,6 @@ async function verify_new_order(req, res,next){
     }else if(!verifyNumber(user_id)){
         res.status(400).json({message:`invalid user_id, must be non-negative number`})
     }else if(!verifyString(status) || !verifyOrderStatus(status)){
-        //return (order_status === "pending" || order_status === "shipped" || order_status === "delievered");
         res.status(400).json({message:`invalid status, must be pending, shipped or delievered`});
     }else{
         next();
