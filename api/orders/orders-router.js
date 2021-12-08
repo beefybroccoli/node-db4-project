@@ -28,11 +28,11 @@ router.get("/:id", middlewareOrders.verify_order_id, async (req, res, next)=>{
 
 router.post("/", middlewareOrders.verify_new_order, middlewareProducts.verify_product_id, middlewareUsers.verify_user_id, async (req, res, next)=>{
   try{
-    const {order_id, product_id, quantity, status, user_id} = req.body;
-    const array = await modelOrders.addOrder({order_id, product_id, quantity, status, user_id});
+    const {order_number, product_id, quantity, status, user_id} = req.body;
+    const array = await modelOrders.addOrder({order_number, product_id, quantity, status, user_id});
     const new_order_id = array[0];
     const new_order = await modelOrders.getOrderById(new_order_id);
-    res.status(201).json({result:1, newOrder:new_order});
+    res.status(201).json({result:1, newOrder:new_order[0]});
   }catch(err){
     next(err);
   }
@@ -41,10 +41,10 @@ router.post("/", middlewareOrders.verify_new_order, middlewareProducts.verify_pr
 router.put("/:id", middlewareOrders.verify_order_id, middlewareOrders.verify_new_order, middlewareProducts.verify_product_id, middlewareUsers.verify_user_id, async (req, res, next)=>{
   try{
     const {id} = req.params;
-    const {order_id, product_id, quantity, status, user_id} = req.body;
-    const result = await modelOrders.modifyOrder(id, {order_id, product_id, quantity, status, user_id});
+    const {order_number, product_id, quantity, status, user_id} = req.body;
+    const result = await modelOrders.modifyOrder(id, {order_number, product_id, quantity, status, user_id});
     const modifiedOrder = await modelOrders.getOrderById(id);
-    res.status(201).json({result, modifiedOrder});
+    res.status(201).json({result, modifiedOrder:modifiedOrder[0]});
   }catch(err){
     next(err);
   }

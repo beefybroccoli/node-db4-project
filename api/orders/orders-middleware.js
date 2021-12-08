@@ -18,8 +18,8 @@ async function verify_order_id (req, res, next){
 }
 
 async function verify_new_order(req, res,next){
-    const {order_id, product_id, quantity, status, user_id} = req.body;
-    if(!verifyNumber(order_id)){
+    const {order_number, product_id, quantity, status, user_id} = req.body;
+    if(!verifyNumber(order_number)){
         res.status(400).json({message:`invalid order_id, must be non-negative number`})
     }else if(!verifyNumber(product_id)){
         res.status(400).json({message:`invalid product_id, must be non-negative number`})
