@@ -1,43 +1,55 @@
 const express = require("express");
 const router = express();
-const model = require("./products-model");
+const modelProducts = require("./products-model");
 const errorHandler = require("../errorhandler");
+const middlewareProducts = require("./products-middleware");
 
 router.get("/", async (req, res, next)=>{
     try{
-      res.status(503).json({method:"GET",status:503,message:`reach PATH /api/products${req.path}`});
+        const array = await modelProducts.getAll();
+        res.status(200).json(array);
     }catch(err){
       next(err);
     }
   })
 
-router.get("/:id", async (req, res, next)=>{
+router.get("/:id", middlewareProducts.verify_product_id, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"GET",status:503,message:`reach PATH /api/products${req.path}`});
+      res.status(200).json(req.array);
   }catch(err){
     next(err);
   }
 })
 
-router.post("/", async (req, res, next)=>{
+router.post("/", middlewareProducts.verify_new_product, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"POST",status:503,message:`reach PATH /api/products${req.path}`});
+    const {name, description, price} = req.body;
+    const array = await modelProducts.addProduct({name, description, price});
+    const new_product_id = array[0];
+    const newProduct = await modelProducts.getById(new_product_id);
+    res.status(200).json({result:1,newProduct:newProduct[0]});
   }catch(err){
     next(err);
   }
 });
 
-router.put("/:id", async (req, res, next)=>{
+router.put("/:id", middlewareProducts.verify_product_id, middlewareProducts.verify_new_product, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"PUT",status:503,message:`reach PATH /api/products${req.path}`});
+    const {name, description, price} = req.body;
+    const {id} = req.params;
+    const result = await modelProducts.modifyProduct(id, {name, description, price});
+    const array = await modelProducts.getById(id);
+    res.status(201).json({result, modifiedProduct:array[0]});
   }catch(err){
     next(err);
   }
 });
 
-router.delete("/:id", async (req, res, next)=>{
+router.delete("/:id", middlewareProducts.verify_product_id, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/products${req.path}`});
+    const {id} = req.params;
+    const result = await modelProducts.removeProduct(id);
+    res.status(201).json({result, deletedProduct:req.array[0]});
   }catch(err){
     next(err);
   }
