@@ -217,8 +217,28 @@ The representation **sent to the server** _could_ look like the following:
 ===================================================================================
 #### milestone 03 - create five API end points for profiles
 
+##### Endpoint GET **/api/profiles/**
+
+##### Endpoint GET **/api/profiles/:id**
+
+##### Endpoint POST **/api/profiles/**
+
+##### Endpoint PUT **/api/profiles/**
+
+##### Endpoint DELETE **/api/profiles/:id**
+
+##### Middleware verify_profile_id
+
+  verify the product exists in the database
+
+##### Middleware verify_new_profile
+
+  verify the {} is valid
+
 ===================================================================================
 #### milestone 04 - create five API end points for products
+
+
 
 ===================================================================================
 #### milestone 05 - create five API end points for orders
