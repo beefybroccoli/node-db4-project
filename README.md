@@ -505,118 +505,125 @@ The representation **sent to the server** _could_ look like the following:
 ===================================================================================
 #### milestone 05 - create five API end points for orders
 
-##### Endpoint GET **/api/orders/**
+  ##### Endpoint GET **/api/orders/**
 
-  The sample query, GET http://localhost:9000/api/orders/
+    The sample query, GET http://localhost:9000/api/orders/
 
-  Body : none;
+    Body : none;
 
-  Response :
-    [
-       {
-        "id": 4,
-        "order_id": 2,
-        "product_id": 4,
-        "quantity": 5,
-        "status": "pending",
-        "user_id": 4
-      },
-      {
-          "id": 5,
-          "order_id": 3,
-          "product_id": 5,
+    Response :
+      [
+        {
+          "id": 4,
+          "order_id": 2,
+          "product_id": 4,
           "quantity": 5,
           "status": "pending",
-          "user_id": 5
-      },
-      ...
-    ]
+          "user_id": 4
+        },
+        {
+            "id": 5,
+            "order_id": 3,
+            "product_id": 5,
+            "quantity": 5,
+            "status": "pending",
+            "user_id": 5
+        },
+        ...
+      ]
 
 
-##### Endpoint GET **/api/orders/:id**
+  ##### Endpoint GET **/api/orders/:id**
 
-  The sample query, GET http://localhost:9000/api/orders/4
+    The sample query, GET http://localhost:9000/api/orders/4
 
-  Body : none;
+    Body : none;
 
-  Response :
-    [
+    Response :
+      [
+        {
+          "id": 4,
+          "order_id": 2,
+          "product_id": 4,
+          "quantity": 5,
+          "status": "pending",
+          "user_id": 4
+        }
+      ]
+
+  ##### Endpoint POST **/api/orders/**
+
+    The sample query, POST http://localhost:9000/api/orders/
+
+    Body : 
+
+    Response :
       {
-        "id": 4,
-        "order_id": 2,
-        "product_id": 4,
-        "quantity": 5,
+        "newOrder": {
+            "id": 7,
+            "order_number": 3124,
+            "product_id": 1,
+            "quantity": 100,
+            "status": "pending",
+            "user_id": 2
+        },
+        "result": 1
+      } 
+
+
+  ##### Endpoint PUT **/api/orders/:id**
+
+    The sample query, PUT http://localhost:9000/api/orders/7
+
+    Body :
+      {
+        "order_number": 3124,
+        "product_id": 1,
+        "quantity": 1000,
         "status": "pending",
-        "user_id": 4
+        "user_id": 2
       }
-    ]
 
-##### Endpoint POST **/api/orders/**
-
-  The sample query, POST http://localhost:9000/api/orders/
-
-  Body : 
-
-  Response :
-    {
-      "newOrder": {
-          "id": 7,
-          "order_number": 3124,
-          "product_id": 1,
-          "quantity": 100,
-          "status": "pending",
-          "user_id": 2
-      },
-      "result": 1
-    } 
+    Response :
+      {
+        "modifiedOrder": {
+            "id": 7,
+            "order_number": 3124,
+            "product_id": 1,
+            "quantity": 1000,
+            "status": "pending",
+            "user_id": 2
+        },
+        "result": 1
+      }
 
 
-##### Endpoint PUT **/api/orders/:id**
+  ##### Endpoint DELETE **/api/orders/:id**
 
-  The sample query, PUT http://localhost:9000/api/orders/7
+    The sample query, DELETE http://localhost:9000/api/orders/5
 
-  Body :
-    {
-      "order_number": 3124,
-      "product_id": 1,
-      "quantity": 1000,
-      "status": "pending",
-      "user_id": 2
-    }
+    Body : none;
 
-  Response :
-    {
-      "modifiedOrder": {
-          "id": 7,
-          "order_number": 3124,
-          "product_id": 1,
-          "quantity": 1000,
-          "status": "pending",
-          "user_id": 2
-      },
-      "result": 1
-    }
+    Response :
+      {
+        "deletedOrder": {
+            "id": 7,
+            "order_number": 3124,
+            "product_id": 1,
+            "quantity": 1000,
+            "status": "pending",
+            "user_id": 2
+        },
+        "result": 1
+      }
 
+  ##### Middleware verify_order_id
 
-##### Endpoint DELETE **/api/orders/:id**
+    ensure the {id} exists in **orders** table
+  
+  ##### Middle verify_new_order
 
-  The sample query, DELETE http://localhost:9000/api/orders/5
-
-  Body : none;
-
-  Response :
-    {
-      "deletedOrder": {
-          "id": 7,
-          "order_number": 3124,
-          "product_id": 1,
-          "quantity": 1000,
-          "status": "pending",
-          "user_id": 2
-      },
-      "result": 1
-    }
-
+    ensure {order_number, product_id, quantity, status, user_id} are valid inputs.
 
 
 ===================================================================================
