@@ -229,11 +229,15 @@ The representation **sent to the server** _could_ look like the following:
 
 ##### Middleware verify_profile_id
 
-  verify the product exists in the database
+  verify the {id} exists in the **profiles** table.
 
 ##### Middleware verify_new_profile
 
-  verify the {} is valid
+  verify the {first_name, last_name, middle_name, email, user_type, user_id} is valid
+
+##### Middleware verify_user_id
+
+  verify the {user_id} exist in the the **users** table.
 
 ===================================================================================
 #### milestone 04 - create five API end points for products
