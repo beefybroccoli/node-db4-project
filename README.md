@@ -369,8 +369,138 @@ The representation **sent to the server** _could_ look like the following:
 
 ===================================================================================
 #### milestone 04 - create five API end points for products
+   
+
+  ##### Endpoint GET **/api/products/**
+
+    The sample query, GET http://localhost:9000/api/products/
+
+    Body : none;
+
+    Response :
+      [
+        {
+            "description": "a very colorful shirt",
+            "id": 1,
+            "name": "color shirt",
+            "price": 11.99
+        },
+        {
+            "description": "a very strong case",
+            "id": 2,
+            "name": "pencil case",
+            "price": 11.99
+        },
+        {
+            "description": "a long lasting bottle",
+            "id": 3,
+            "name": "water bottle",
+            "price": 11.99
+        },
+        {
+            "description": "a wood box",
+            "id": 4,
+            "name": "container box",
+            "price": 11.99
+        },
+        {
+            "description": "new",
+            "id": 6,
+            "name": "new",
+            "price": 10.99
+        }
+      ]
 
 
+  ##### Endpoint GET **/api/products/:id**
+  
+    The sample query, GET http://localhost:9000/api/products/4
+
+    Body : none;
+
+    Response :
+      [
+          {
+              "description": "a wood box",
+              "id": 4,
+              "name": "container box",
+              "price": 11.99
+          }
+      ]
+
+
+  ##### Endpoint POST **/api/products/**
+  
+    The sample query, POST http://localhost:9000/api/products/
+
+    Body :
+      {
+        "description": "description",
+        "name": "bookmark",
+        "price": 2.1
+      }
+
+    Response :
+
+      {
+        "newProduct": {
+            "description": "description",
+            "id": 7,
+            "name": "bookmark",
+            "price": 2.1
+        },
+        "result": 1
+      }
+
+
+  ##### Endpoint PUT **/api/products/:id**
+  
+    The sample query, PUT http://localhost:9000/api/products/7
+
+    Body : 
+      {
+        "description": "description",
+        "id": 7,
+        "name": "new bookmark",
+        "price": 2.1
+      }
+
+    Response :
+      {
+        "modifiedProduct": {
+            "description": "description",
+            "id": 7,
+            "name": "new bookmark",
+            "price": 2.1
+        },
+        "result": 1
+      }
+
+  
+  ##### Endpoint DELETE **/api/products/:id**
+  
+    The sample query, DELETE http://localhost:9000/api/profiles/7
+
+    Body : none;
+
+    Response :
+      {
+        "deletedProduct": {
+            "description": "description",
+            "id": 7,
+            "name": "new bookmark",
+            "price": 2.1
+        },
+        "result": 1
+      }
+
+  ##### Middleware verify_product_id
+
+    check if the product id exists in the **products** table
+  
+  ##### Middleware verify_new_products
+
+    verify {name, descriptoin, prices} values
 
 ===================================================================================
 #### milestone 05 - create five API end points for orders
