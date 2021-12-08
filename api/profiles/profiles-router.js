@@ -7,9 +7,8 @@ const middlewareProfiles = require("./profiles-middleware");
 
 router.get("/", async (req, res, next)=>{
     try{
-      // res.status(503).json({method:"GET",status:503,message:`reach PATH /api/profiles${req.path}`});
-      const profiles = await modelProiles.getAll();
-      res.status(200).json(profiles);
+      const array = await modelProiles.getAll();
+      res.status(200).json(array);
     }catch(err){
       next(err);
     }
@@ -17,8 +16,7 @@ router.get("/", async (req, res, next)=>{
 
 router.get("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
   try{
-    // res.status(503).json({method:"GET",status:503,message:`reach PATH /api/profiles${req.path}`});
-    res.status(200).json(req.profile);
+    res.status(200).json(req.array);
   }catch(err){
     next(err);
   }
@@ -55,7 +53,7 @@ router.delete("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)
     // res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/profiles${req.path}`});
     const {id} = req.params;
     const result = await modelProiles.deleteProfile(id);
-    res.status(200).json({result, deletedProfile:req.profile});
+    res.status(200).json({result, deletedProfile:req.array[0]});
   }catch(err){
     next(err);
   }

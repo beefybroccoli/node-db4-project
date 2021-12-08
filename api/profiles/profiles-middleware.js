@@ -11,7 +11,7 @@ async function verifyProfileId(req, res, next) {
         if(verifyEmptyArray(array)){
             res.status(400).json({message:`id ${id} not found`});
         }else{
-            req.profile = array[0];
+            req.array = array;
             next();
         }
     }
