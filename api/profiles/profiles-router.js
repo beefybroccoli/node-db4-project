@@ -2,42 +2,60 @@ const express = require("express");
 const router = express();
 const model = require("./profiles-model");
 const errorHandler = require("../errorhandler");
+const modelProiles = require("./profiles-model");
+const middlewareProfiles = require("./profiles-middleware");
 
 router.get("/", async (req, res, next)=>{
     try{
-      res.status(503).json({method:"GET",status:503,message:`reach PATH /api/profiles${req.path}`});
+      // res.status(503).json({method:"GET",status:503,message:`reach PATH /api/profiles${req.path}`});
+      const profiles = await modelProiles.getAll();
+      res.status(200).json(profiles);
     }catch(err){
       next(err);
     }
   })
 
-router.get("/:id", async (req, res, next)=>{
+router.get("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"GET",status:503,message:`reach PATH /api/profiles${req.path}`});
+    // res.status(503).json({method:"GET",status:503,message:`reach PATH /api/profiles${req.path}`});
+    res.status(200).json(req.profile);
   }catch(err){
     next(err);
   }
 })
 
-router.post("/", async (req, res, next)=>{
+router.post("/", middlewareProfiles.verifyNewProfile, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"POST",status:503,message:`reach PATH /api/profiles${req.path}`});
+    // res.status(503).json({method:"POST",status:503,message:`reach PATH /api/profiles${req.path}`});
+    const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
+    const array = await modelProiles.addProfile({first_name, middle_name, last_name, email, user_type, user_id});
+    const new_profile_id = array[0];
+    const newProile = await modelProiles.getById(new_profile_id);
+    res.status(201).json({result:1, newProfile:newProile[0]});
   }catch(err){
     next(err);
   }
 });
 
-router.put("/:id", async (req, res, next)=>{
+router.put("/:id", middlewareProfiles.verifyProfileId, middlewareProfiles.verifyNewProfile, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"PUT",status:503,message:`reach PATH /api/profiles${req.path}`});
+    // res.status(503).json({method:"PUT",status:503,message:`reach PATH /api/profiles${req.path}`});
+    const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
+    const {id} = req.params;
+    const result = await modelProiles.modifyProfile(id, {first_name, middle_name, last_name, email, user_type, user_id});
+    const array = await model.getById(id);
+    res.status(201).json({result, modifiedProfile:array[0]});
   }catch(err){
     next(err);
   }
 });
 
-router.delete("/:id", async (req, res, next)=>{
+router.delete("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
   try{
-    res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/profiles${req.path}`});
+    // res.status(503).json({method:"DELETE",status:503,message:`reach PATH /api/profiles${req.path}`});
+    const {id} = req.params;
+    const result = await modelProiles.deleteProfile(id);
+    res.status(200).json({result, deletedProfile:req.profile});
   }catch(err){
     next(err);
   }
