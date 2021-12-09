@@ -6,6 +6,8 @@ const modelProiles = require("./profiles-model");
 const {verifyNewProfile, verifyProfileId} = require("./profiles-middleware");
 const {verify_user_id} = require("../users/users-middleware");
 
+router.use(express.json());
+
 router.get("/", async (req, res, next)=>{
     try{
       const array = await modelProiles.getAll();
