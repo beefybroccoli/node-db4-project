@@ -555,7 +555,6 @@ The representation **sent to the server** _could_ look like the following:
 
     Body : 
       {
-        "id": 7,
         "order_number": 3124,
         "product_id": 1,
         "quantity": 100,
