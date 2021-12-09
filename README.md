@@ -631,12 +631,12 @@ The representation **sent to the server** _could_ look like the following:
 #### milestone 06 - create tests
   
   Created tests using Jest and Supertest for the following:
-  _middleware-verify.js, middleware-verify.test.js
-  _server.js, server.test.js
-  _orders-router.js, orders-routers.test.js
-  _products-router.js, products-router.test.js
-  _profiles-router.js, profiles-router.test.js
-  _users-router.js, users-router.test.js
+  * middleware-verify.js, middleware-verify.test.js
+  * server.js, server.test.js
+  * orders-router.js, orders-routers.test.js
+  * products-router.js, products-router.test.js
+  * profiles-router.js, profiles-router.test.js
+  * users-router.js, users-router.test.js
 
 
 ===================================================================================
