@@ -6,6 +6,8 @@ const {verify_order_id, verify_new_order} = require("./orders-middleware");
 const {verify_product_id} = require("../products/products-middleware");
 const {verify_user_id} = require("../users/users-middleware");
 
+router.use(express.json());
+
 router.get("/", async (req, res, next)=>{
     try{
       const array = await modelOrders.getOrders();
