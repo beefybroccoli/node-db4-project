@@ -219,8 +219,6 @@ The representation **sent to the server** _could_ look like the following:
     _alphanumeric
     _length between 5 and 20
 
-  ##### Middleware 
-
 ===================================================================================
 #### milestone 03 - create five API end points for profiles
 
@@ -279,12 +277,12 @@ The representation **sent to the server** _could_ look like the following:
 
     Body :
       {
-          "email": "mason3@mail.com",
-          "first_name": "mason3",
-          "last_name": "mason3",
-          "middle_name": "c",
-          "user_id": 4,
-          "user_type": "user"
+        "email": "mason3@mail.com",
+        "first_name": "mason3",
+        "last_name": "mason3",
+        "middle_name": "c",
+        "user_id": 4,
+        "user_type": "user"
       }
 
     Response :
@@ -308,13 +306,13 @@ The representation **sent to the server** _could_ look like the following:
 
     Body :
       {
-          "email": "mason3@mail.com",
-          "first_name": "mason3",
-          "id": 10,
-          "last_name": "mason3",
-          "middle_name": "c",
-          "user_id": 4,
-          "user_type": "user"
+        "email": "mason3@mail.com",
+        "first_name": "mason3",
+        "id": 10,
+        "last_name": "mason3",
+        "middle_name": "c",
+        "user_id": 4,
+        "user_type": "user"
       }
 
     Response:
