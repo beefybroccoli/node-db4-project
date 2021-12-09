@@ -3,7 +3,7 @@ const {verifyNumber, verifyString, verifyEmptyArray, verifyStringLength, verifyU
 const modelUsers = require("../users/users-model");
 
 async function verifyProfileId(req, res, next) {
-    const profile_id = req.body.profile_id ? req.body.profile_id : req.params.id ;
+    const profile_id = 'user_id' in req ? req.body.profile_id : req.params.id ;
     if (!verifyNumber(profile_id)){
         res.status(400).json({message:`invalid profile id ${profile_id}`});
     }else{
@@ -16,18 +16,6 @@ async function verifyProfileId(req, res, next) {
         }
     }
 }
-
-//--------------pending delete-----------------------------------
-// async function verify_user_id(req, res, next){
-//     const {user_id} = req.body;
-//     const array = await modelUsers.getById(user_id);
-
-//     if (verifyEmptyArray(array)){
-//         res.status(404).json({message:`user_id ${user_id} not found`});
-//     }else{
-//         next();
-//     }
-// }
 
 async function verifyNewProfile(req, res, next) {
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;

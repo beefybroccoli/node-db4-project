@@ -3,8 +3,10 @@ const router = express();
 const model = require("./profiles-model");
 const errorHandler = require("../errorhandler");
 const modelProiles = require("./profiles-model");
-const middlewareProfiles = require("./profiles-middleware");
-const middlewareUsers = require("../users/users-middleware");
+const {verifyNewProfile, verifyProfileId} = require("./profiles-middleware");
+const {verify_user_id} = require("../users/users-middleware");
+
+router.use(express.json());
 
 router.get("/", async (req, res, next)=>{
     try{
@@ -15,7 +17,7 @@ router.get("/", async (req, res, next)=>{
     }
   })
 
-router.get("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
+router.get("/:id", verifyProfileId, async (req, res, next)=>{
   try{
     res.status(200).json(req.array);
   }catch(err){
@@ -23,7 +25,7 @@ router.get("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
   }
 })
 
-router.post("/", middlewareProfiles.verifyNewProfile, middlewareUsers.verify_user_id, async (req, res, next)=>{
+router.post("/", verifyNewProfile, verify_user_id, async (req, res, next)=>{
   try{
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
     const array = await modelProiles.addProfile({first_name, middle_name, last_name, email, user_type, user_id});
@@ -35,7 +37,7 @@ router.post("/", middlewareProfiles.verifyNewProfile, middlewareUsers.verify_use
   }
 });
 
-router.put("/:id", middlewareProfiles.verifyProfileId, middlewareProfiles.verifyNewProfile, middlewareUsers.verify_user_id, async (req, res, next)=>{
+router.put("/:id", verifyProfileId, verifyNewProfile, verify_user_id, async (req, res, next)=>{
   try{
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
     const {id} = req.params;
@@ -47,7 +49,7 @@ router.put("/:id", middlewareProfiles.verifyProfileId, middlewareProfiles.verify
   }
 });
 
-router.delete("/:id", middlewareProfiles.verifyProfileId, async (req, res, next)=>{
+router.delete("/:id", verifyProfileId, async (req, res, next)=>{
   try{
     const {id} = req.params;
     const result = await modelProiles.deleteProfile(id);

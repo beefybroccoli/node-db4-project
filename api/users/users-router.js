@@ -2,7 +2,8 @@ const express = require("express");
 const router = express();
 const modelUsers = require("./users-model");
 const errorHandler = require("../errorhandler");
-const middlewareUsers = require("./users-middleware");
+const {verify_user_id, verify_new_user, verify_unique_user} = require("./users-middleware");
+router.use(express.json());
 
 router.get("/", async (req , res, next)=>{
     try{
@@ -13,7 +14,7 @@ router.get("/", async (req , res, next)=>{
     }
 })
 
-router.get("/:id", middlewareUsers.verify_user_id, (req, res, next)=>{
+router.get("/:id", verify_user_id, (req, res, next)=>{
   try{
     res.status(200).json(req.user);
   }catch(err){
@@ -21,7 +22,7 @@ router.get("/:id", middlewareUsers.verify_user_id, (req, res, next)=>{
   }
 })
 
-router.post("/", middlewareUsers.verify_new_user, async (req, res, next)=>{
+router.post("/", verify_new_user, async (req, res, next)=>{
   try{
     const {username, password} = req.body;
     const new_id = await modelUsers.addUser({username, password});
@@ -32,7 +33,7 @@ router.post("/", middlewareUsers.verify_new_user, async (req, res, next)=>{
   }
 });
 
-router.put("/:id", middlewareUsers.verify_user_id, middlewareUsers.verify_new_user, async (req, res, next)=>{
+router.put("/:id", verify_user_id, verify_new_user, async (req, res, next)=>{
   try{
     const {username, password} = req.body;
     const {id} = req.params;
@@ -44,17 +45,17 @@ router.put("/:id", middlewareUsers.verify_user_id, middlewareUsers.verify_new_us
   }
 });
 
-router.delete("/:id", middlewareUsers.verify_user_id, async (req, res, next)=>{
+router.delete("/:id", verify_user_id, async (req, res, next)=>{
   try{
     const {id} = req.params;
     const result = await modelUsers.deleteUser(id);
-    res.status(201).json({result, deletedUser:req.user});
+    res.status(201).json({result, deletedUser:req.user[0]});
   }catch(err){
     next(err);
   }
 })
 
-router.use("*", (req, res)=>{
+router.get("*", (req, res)=>{
   res.status(404).json({message:`invalid path /api/users${req.path}`});
 })
 
