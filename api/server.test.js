@@ -20,4 +20,9 @@ describe('GET /', function () {
         const res = await request(app).get("/");
         expect (res.body).toHaveProperty('message', "Hello World from server");
     });
+
+    test('respond with invalid path from server', async ()=> {
+        const res = await request(app).get("/unknown");
+        expect (res.body).toHaveProperty('message', "path /unknown not found");
+    });
 });
