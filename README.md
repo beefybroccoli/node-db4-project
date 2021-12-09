@@ -219,8 +219,6 @@ The representation **sent to the server** _could_ look like the following:
     _alphanumeric
     _length between 5 and 20
 
-  ##### Middleware 
-
 ===================================================================================
 #### milestone 03 - create five API end points for profiles
 
@@ -279,12 +277,12 @@ The representation **sent to the server** _could_ look like the following:
 
     Body :
       {
-          "email": "mason3@mail.com",
-          "first_name": "mason3",
-          "last_name": "mason3",
-          "middle_name": "c",
-          "user_id": 4,
-          "user_type": "user"
+        "email": "mason3@mail.com",
+        "first_name": "mason3",
+        "last_name": "mason3",
+        "middle_name": "c",
+        "user_id": 4,
+        "user_type": "user"
       }
 
     Response :
@@ -308,13 +306,13 @@ The representation **sent to the server** _could_ look like the following:
 
     Body :
       {
-          "email": "mason3@mail.com",
-          "first_name": "mason3",
-          "id": 10,
-          "last_name": "mason3",
-          "middle_name": "c",
-          "user_id": 4,
-          "user_type": "user"
+        "email": "mason3@mail.com",
+        "first_name": "mason3",
+        "id": 10,
+        "last_name": "mason3",
+        "middle_name": "c",
+        "user_id": 4,
+        "user_type": "user"
       }
 
     Response:
@@ -556,6 +554,13 @@ The representation **sent to the server** _could_ look like the following:
     The sample query, POST http://localhost:9000/api/orders/
 
     Body : 
+      {
+        "order_number": 3124,
+        "product_id": 1,
+        "quantity": 100,
+        "status": "pending",
+        "user_id": 2
+      }
 
     Response :
       {
@@ -638,4 +643,5 @@ The representation **sent to the server** _could_ look like the following:
 
 
 ===================================================================================
+
 #### milestone 07 - create five API end points using multiple tables

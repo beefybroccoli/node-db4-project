@@ -9,7 +9,7 @@
     "seed": "knex seed:run",
     "resetdb": "npm run rollback && npm run migrate && npm run seed",
     "push": "git add . && git commit -m '...' && git push origin main",
-    "push6": "git add . && git commit -m '...' && git push origin milestone-06",
+    "push7": "git add . && git commit -m '...' && git push origin milestone-07",
     "jest": "jest --watch",
     "testserver": "cross-env NODE_ENV=testing jest --verbose --runInBand --watch"
   },
