@@ -54,7 +54,7 @@ router.delete("/:id", verify_user_id, async (req, res, next)=>{
   }
 })
 
-router.use("*", (req, res)=>{
+router.get("*", (req, res)=>{
   res.status(404).json({message:`invalid path /api/users${req.path}`});
 })
 
