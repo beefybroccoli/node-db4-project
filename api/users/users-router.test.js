@@ -68,7 +68,19 @@ describe('PUT /:id', function () {
 })
 
 describe('DELETE /:id', function () {
-    
+    test('respond from DELETE /:id', async ()=>{
+        const res = await request(app).post("/").send({username:"tomtom", password:"tomtom"});
+        expect(res.body).toMatchObject({
+            result: 1,
+            createdUser: { id: 6, username: 'tomtom', password: 'tomtom' }
+          });
+        const res2 = await request(app).delete("/6");
+        expect(res2.body).toMatchObject({
+            result: 1,
+            deletedUser: { id: 6, username: 'tomtom', password: 'tomtom' }
+        });
+        // console.log("res2.body = ", res2.body);
+    })
 })
 
 describe('GET /api/users/other/', function () {

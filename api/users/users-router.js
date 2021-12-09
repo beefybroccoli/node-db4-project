@@ -49,7 +49,7 @@ router.delete("/:id", verify_user_id, async (req, res, next)=>{
   try{
     const {id} = req.params;
     const result = await modelUsers.deleteUser(id);
-    res.status(201).json({result, deletedUser:req.user});
+    res.status(201).json({result, deletedUser:req.user[0]});
   }catch(err){
     next(err);
   }
