@@ -79,14 +79,64 @@ describe("Endpoint POST /", ()=>{
               price: 10.99
             }
           });
-        console.log("res.body = ", res.body);
+        // console.log("res.body = ", res.body);
     })
 })
 
 describe("Endpoint PUT /:id", ()=>{
-    
+    test("respond from PUT /:id", async()=>{
+        const res = await request(app).post("/").send({
+            name:"new show", description:"new shiny shoes", price:10.99
+        });
+        expect(res.body).toMatchObject({
+            result: 1,
+            newProduct: {
+              id: 6,
+              name: 'new show',
+              description: 'new shiny shoes',
+              price: 10.99
+            }
+          });
+        const res2 = await request(app).put("/6").send({
+            name:"new show 2", description:"new shiny shoes 2", price:100.99
+        });
+        expect(res2.body).toMatchObject(  {
+            result: 1,
+            modifiedProduct: {
+              id: 6,
+              name: 'new show 2',
+              description: 'new shiny shoes 2',
+              price: 100.99
+            }
+          });
+        // console.log("res2.body = ", res2.body);
+    })  
 })
 
 describe("Endpoint DELETE /:id", ()=>{
-    
+    test("respond from DELETE /:id", async()=>{
+        const res = await request(app).post("/").send({
+            name:"new show", description:"new shiny shoes", price:10.99
+        });
+        expect(res.body).toMatchObject({
+            result: 1,
+            newProduct: {
+              id: 6,
+              name: 'new show',
+              description: 'new shiny shoes',
+              price: 10.99
+            }
+          });
+        const res2 = await request(app).delete("/6");
+        expect(res2.body).toMatchObject( {
+            result: 1,
+            deletedProduct: {
+              id: 6,
+              name: 'new show',
+              description: 'new shiny shoes',
+              price: 10.99
+            }
+          });
+        // console.log("res2.body = ", res2.body);
+    })  
 })
