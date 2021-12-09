@@ -4,6 +4,8 @@ const modelProducts = require("./products-model");
 const errorHandler = require("../errorhandler");
 const {verify_new_product, verify_product_id} = require("./products-middleware");
 
+router.use(express.json());
+
 router.get("/", async (req, res, next)=>{
     try{
         const array = await modelProducts.getAll();

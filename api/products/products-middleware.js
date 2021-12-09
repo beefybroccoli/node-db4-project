@@ -2,7 +2,7 @@ const modelProducts = require("./products-model");
 const {verifyNumber, verifyString, verifyStringLength, verifyEmptyArray} = require("../middleware-verify");
 
 async function verify_product_id(req, res, next){
-    const product_id = req.body.product_id ? req.body.product_id : req.params.id  ;
+    const product_id = 'product_id' in req.body ? req.body.product_id : req.params.id  ;
     if (!verifyNumber(product_id)){
         res.status(400).json({message:`invalid product id ${product_id}`});
     }else{
