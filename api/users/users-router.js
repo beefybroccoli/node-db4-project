@@ -3,6 +3,7 @@ const router = express();
 const modelUsers = require("./users-model");
 const errorHandler = require("../errorhandler");
 const {verify_user_id, verify_new_user, verify_unique_user} = require("./users-middleware");
+router.use(express.json());
 
 router.get("/", async (req , res, next)=>{
     try{

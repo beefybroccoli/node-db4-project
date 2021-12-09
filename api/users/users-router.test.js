@@ -42,13 +42,29 @@ describe('GET /:id', function () {
 describe('POST /', function () {
     test('respond from POST /', async ()=>{
         const res = await request(app).post("/").send({username:"tomtom", password:"tomtom"});
-        console.log("res.body = ", res.body);
+        expect(res.body).toMatchObject({
+            result: 1,
+            createdUser: { id: 6, username: 'tomtom', password: 'tomtom' }
+          });
+        // console.log("res.body = ", res.body);
     })
     
 })
 
 describe('PUT /:id', function () {
-    
+    test('respond from PUT /', async ()=>{
+        const res = await request(app).post("/").send({username:"tomtom", password:"tomtom"});
+        expect(res.body).toMatchObject({
+            result: 1,
+            createdUser: { id: 6, username: 'tomtom', password: 'tomtom' }
+          });
+        const res2 = await request(app).put("/6").send({username:"tomtom2", password:"tomtom2"});
+        expect(res2.body).toMatchObject({
+            result: 1,
+            modifiedUser: { id: 6, username: 'tomtom2', password: 'tomtom2' }
+        });
+        // console.log("res.body = ", res.body);
+    })
 })
 
 describe('DELETE /:id', function () {
