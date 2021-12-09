@@ -630,7 +630,6 @@ The representation **sent to the server** _could_ look like the following:
 
     ensure {order_number, product_id, quantity, status, user_id} are valid inputs.
 
-
 ===================================================================================
 #### milestone 06 - create tests
    
@@ -644,4 +643,5 @@ The representation **sent to the server** _could_ look like the following:
 
 
 ===================================================================================
+
 #### milestone 07 - create five API end points using multiple tables
