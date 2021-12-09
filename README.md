@@ -625,6 +625,17 @@ The representation **sent to the server** _could_ look like the following:
 
     ensure {order_number, product_id, quantity, status, user_id} are valid inputs.
 
+===================================================================================
+#### milestone 06 - create tests
+   
+  Created tests using Jest and Supertest for the following:
+  * middleware-verify.js, middleware-verify.test.js
+  * server.js, server.test.js
+  * orders-router.js, orders-routers.test.js
+  * products-router.js, products-router.test.js
+  * profiles-router.js, profiles-router.test.js
+  * users-router.js, users-router.test.js
+
 
 ===================================================================================
-#### milestone 06 - create five API end points using multiple tables
+#### milestone 07 - create five API end points using multiple tables
