@@ -15,7 +15,6 @@ router.get("/", async (req , res, next)=>{
 
 router.get("/:id", verify_user_id, (req, res, next)=>{
   try{
-    console.log("req.params.id = ", req.params.id);
     res.status(200).json(req.user);
   }catch(err){
     next(err);

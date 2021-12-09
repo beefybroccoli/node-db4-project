@@ -28,18 +28,37 @@ describe('GET /', function () {
         const res = await request(app).get("/");
         expect (res.body).toMatchObject(usersTable);
         // console.log("res.body = ", res.body);
-    });
+    });    
+});
 
-    
+describe('GET /:id', function () {
     test('respond from /:id', async ()=> {
-        const res = await request(app).get("/5");
-        expect (res.body).toMatchObject([usersTable[4]]);
+        const res = await request(app).get("/1");
+        expect (res.body).toMatchObject([usersTable[0]]);
         // console.log("res.body = ", res.body);
     });
+})
 
+describe('POST /', function () {
+    test('respond from POST /', async ()=>{
+        const res = await request(app).post("/").send({username:"tomtom", password:"tomtom"});
+        console.log("res.body = ", res.body);
+    })
+    
+})
+
+describe('PUT /:id', function () {
+    
+})
+
+describe('DELETE /:id', function () {
+    
+})
+
+describe('GET /api/users/other/', function () {
     test('respond with invalid path from server', async ()=> {
         const res = await request(app).get("/other/other");
         // console.log("res.body = ", res.body);
         expect (res.body).toHaveProperty('message', `invalid path /api/users/other/other`);
     });
-});
+})
