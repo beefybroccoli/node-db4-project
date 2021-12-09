@@ -34,13 +34,12 @@ describe('GET /', function () {
     test('respond from /:id', async ()=> {
         const res = await request(app).get("/5");
         expect (res.body).toMatchObject([usersTable[4]]);
-        console.log("res.body = ", res.body);
+        // console.log("res.body = ", res.body);
     });
 
-    // test('respond with invalid path from server', async ()=> {
-        
-    //     const res = await request(app).get("/other/other");
-    //     // console.log("res.body = ", res.body);
-    //     expect (res.body).toHaveProperty('message', `invalid path /api/users/other/other`);
-    // });
+    test('respond with invalid path from server', async ()=> {
+        const res = await request(app).get("/other/other");
+        // console.log("res.body = ", res.body);
+        expect (res.body).toHaveProperty('message', `invalid path /api/users/other/other`);
+    });
 });
