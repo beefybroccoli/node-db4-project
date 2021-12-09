@@ -27,14 +27,20 @@ describe('GET /', function () {
     test('respond from /', async ()=> {
         const res = await request(app).get("/");
         expect (res.body).toMatchObject(usersTable);
+        // console.log("res.body = ", res.body);
+    });
+
+    
+    test('respond from /:id', async ()=> {
+        const res = await request(app).get("/5");
+        expect (res.body).toMatchObject([usersTable[4]]);
         console.log("res.body = ", res.body);
     });
 
-    // jest.setTimeout(10000);
-    test('respond with invalid path from server', async ()=> {
+    // test('respond with invalid path from server', async ()=> {
         
-        const res = await request(app).get("/other/other");
-        // console.log("res.body = ", res.body);
-        expect (res.body).toHaveProperty('message', `invalid path /api/users/other/other`);
-    });
+    //     const res = await request(app).get("/other/other");
+    //     // console.log("res.body = ", res.body);
+    //     expect (res.body).toHaveProperty('message', `invalid path /api/users/other/other`);
+    // });
 });
