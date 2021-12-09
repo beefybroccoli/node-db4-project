@@ -3,6 +3,7 @@ const varString = "string";
 const varNull = null;
 const varNumber = 55;
 const varArray = [{'key1':'value1'}];
+const varObj = {'key1':'value1'};
 
 test('test verifyUndefined', ()=>{
     expect(typeof unknown_variable === 'undefined').toBe(true);
@@ -31,6 +32,12 @@ test('test verifyString', ()=>{
     expect(verifyString(undefined)).toBe(false);
 })
 
+test('test verifyStringLength', ()=>{
+    expect(verifyStringLength(2,10,varString)).toBe(true);
+    expect(verifyStringLength(2,10,"a")).toBe(false);
+    expect(verifyStringLength(2,10,"abcdefghijklmn")).toBe(false);
+})
+
 test('test verifyNumber', ()=>{
     expect(verifyNumber(varNumber)).toBe(true);
     expect(verifyNumber(varNull)).toBe(false);
@@ -44,6 +51,7 @@ test('test verifyEmptyArray', ()=>{
     expect(verifyEmptyArray(varNumber)).toBe(false);
     expect(verifyEmptyArray(varNull)).toBe(false);
     expect(verifyEmptyArray(varArray)).toBe(false);
+    expect(verifyEmptyArray(varObj)).toBe(false);
     expect(verifyEmptyArray(undefined)).toBe(false);
     expect(verifyEmptyArray(varString)).toBe(false);
 })
