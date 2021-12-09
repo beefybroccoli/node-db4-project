@@ -2,7 +2,7 @@ const modelUsers = require("./users-model");
 const {verifyNumber, verifyString, verifyStringLength} = require("../middleware-verify");
 
 async function verify_user_id(req, res, next){
-    const input_id = 'user_id' in req.body ? req.body['user_id'] : req.params.id;
+    const input_id = 'user_id' in req.body ? req.body.user_id : req.params.id;
     if(!verifyNumber(input_id)){
     // if(!verifyNumber(input_id)){
         res.status(400).json({message:`invalid user id - ${input_id}`});
