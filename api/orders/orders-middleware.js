@@ -2,13 +2,13 @@ const modelOrders = require("./orders-model");
 const {verifyEmptyArray, verifyString, verifyNumber, verifyOrderStatus} = require("../middleware-verify");
 
 async function verify_order_id (req, res, next){
-    const {id} = req.params;
-    if(!verifyNumber(id)){
-        res.status(400).json({message:`invalid order id ${id}`});
+    const input_id = 'order_id' in req.body ? req.body.order_id : req.params.id;
+    if(!verifyNumber(input_id)){
+        res.status(400).json({message:`invalid order id ${input_id}`});
     }else{
-        const array = await modelOrders.getOrderById(id);
+        const array = await modelOrders.getOrderById(input_id);
         if(verifyEmptyArray(array)){
-            res.status(400).json({message:`order id ${id} not found`});
+            res.status(400).json({message:`order id ${input_id} not found`});
         }else{
             req.array = array;
             next();
