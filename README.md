@@ -556,6 +556,14 @@ The representation **sent to the server** _could_ look like the following:
     The sample query, POST http://localhost:9000/api/orders/
 
     Body : 
+      {
+        "id": 7,
+        "order_number": 3124,
+        "product_id": 1,
+        "quantity": 100,
+        "status": "pending",
+        "user_id": 2
+      }
 
     Response :
       {
