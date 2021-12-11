@@ -27,7 +27,8 @@ router.get("/:id", verifyProfileId, async (req, res, next)=>{
 router.post("/", verifyNewProfile, verify_user_id, async (req, res, next)=>{
   try{
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
-    const array = await modelProfiles.addProfile({first_name, middle_name, last_name, email, user_type, user_id});
+    const array = await modelProfiles.addProfile(
+        {first_name, middle_name, last_name, email, user_type, user_id});
     const new_profile_id = array[0];
     const newProile = await modelProfiles.getById(new_profile_id);
     res.status(201).json({result:1, newProfile:newProile[0]});
@@ -36,11 +37,15 @@ router.post("/", verifyNewProfile, verify_user_id, async (req, res, next)=>{
   }
 });
 
-router.put("/:id", verifyProfileId, verifyNewProfile, verify_user_id, async (req, res, next)=>{
+router.put("/:id", verifyProfileId, verifyNewProfile, verify_user_id, 
+  async (req, res, next)=>{
   try{
     const {first_name, middle_name, last_name, email, user_type, user_id} = req.body;
     const {id} = req.params;
-    const result = await modelProfiles.modifyProfile(id, {first_name, middle_name, last_name, email, user_type, user_id});
+    const result = 
+      await modelProfiles.modifyProfile(
+        id, {first_name, middle_name, last_name, email, user_type, user_id}
+      );
     const array = await model.getById(id);
     res.status(201).json({result, modifiedProfile:array[0]});
   }catch(err){

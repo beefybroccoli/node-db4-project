@@ -1,5 +1,6 @@
 const modelUsers = require("./users-model");
-const {verifyNumber, verifyString, verifyStringLength} = require("../middleware-verify");
+const {verifyNumber, verifyString, verifyStringLength, verifyUndefined} 
+    = require("../middleware-verify");
 
 async function verify_user_id(req, res, next){
     const input_id = 'user_id' in req.body ? req.body.user_id : req.params.id;
@@ -19,7 +20,10 @@ async function verify_user_id(req, res, next){
 
 async function verify_new_user(req, res, next){
     const {username, password} = req.body;
-    if(!verifyString(username) || !verifyString(password)){
+    if(verifyUndefined(username) || verifyUndefined(password)){
+        res.status(400).json({message:"require username or password"});
+    }
+    else if(!verifyString(username) || !verifyString(password)){
         res.status(400).json({message:"invalid username or password"});
     }else if(!verifyStringLength(5, 20, username) || !verifyStringLength(5, 20, password)){
         res.status(400).json({message:"username or password length need to be bertween 5 and 20"});
