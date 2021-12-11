@@ -2,6 +2,19 @@ const request = require("supertest");
 const app = require("./orders-router");
 const db = require("../../database/db-config");
 
+beforeAll(async () => {
+  await db.migrate.rollback()
+  await db.migrate.latest()
+})
+
+beforeEach(async () => {
+  await db.seed.run()
+})
+
+afterAll(async () => {
+  await db.destroy()
+})
+
 const ordersTable =  [
     {
       id: 1,
@@ -44,20 +57,6 @@ const ordersTable =  [
       user_id: 5
     }
   ];
-
-
-beforeAll(async () => {
-    await db.migrate.rollback()
-    await db.migrate.latest()
-  })
-
-beforeEach(async () => {
-    await db.seed.run()
-})
-
-afterAll(async () => {
-    await db.destroy()
-})
 
 describe("Endpoint GET /" , () =>{
     test("GET /", async ()=>{
