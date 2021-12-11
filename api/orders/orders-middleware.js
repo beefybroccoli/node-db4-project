@@ -1,5 +1,6 @@
 const modelOrders = require("./orders-model");
-const {verifyEmptyArray, verifyString, verifyNumber, verifyOrderStatus} = require("../middleware-verify");
+const {verifyEmptyArray, verifyString, verifyNumber, verifyOrderStatus} = 
+    require("../middleware-verify");
 
 async function verify_order_id (req, res, next){
     const input_id = 'order_id' in req.body ? req.body.order_id : req.params.id;

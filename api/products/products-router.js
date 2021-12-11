@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express();
 const modelProducts = require("./products-model");
-const errorHandler = require("../errorhandler");
 const {verify_new_product, verify_product_id} = require("./products-middleware");
 
-router.use(express.json());
+router.use(express.Router());
 
 router.get("/", async (req, res, next)=>{
     try{
@@ -56,11 +55,5 @@ router.delete("/:id", verify_product_id, async (req, res, next)=>{
     next(err);
   }
 })
-
-router.use("*", (req, res)=>{
-    res.status(404).json({message:`invalid path /api/products${req.path}`});
-  })
-
-router.use(errorHandler);
   
 module.exports = router;

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express();
 const modelUsers = require("./users-model");
-const errorHandler = require("../errorhandler");
 const {verify_user_id, verify_new_user, verify_unique_user} = require("./users-middleware");
-router.use(express.json());
+
+router.use(express.Router());
 
 router.get("/", async (req , res, next)=>{
     try{
@@ -54,11 +54,5 @@ router.delete("/:id", verify_user_id, async (req, res, next)=>{
     next(err);
   }
 })
-
-router.get("*", (req, res)=>{
-  res.status(404).json({message:`invalid path /api/users${req.path}`});
-})
-
-router.use(errorHandler);
   
 module.exports = router;
