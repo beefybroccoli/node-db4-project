@@ -116,4 +116,4 @@ dist
 .pnp.*
 
 #dev.sql3
-database/db/dev.sqlite3
+./database/db/dev.sqlite3
