@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express();
-const errorHandler = require("../errorhandler");
 const modelOrders = require("./orders-model");
 const {verify_order_id, verify_new_order} = require("./orders-middleware");
 const {verify_product_id} = require("../products/products-middleware");
 const {verify_user_id} = require("../users/users-middleware");
 
-router.use(express.json());
+router.use(express.Router());
 
 router.get("/", async (req, res, next)=>{
     try{
@@ -60,11 +59,5 @@ router.delete("/:id", verify_order_id, async (req, res, next)=>{
     next(err);
   }
 })
-
-router.use("*", (req, res)=>{
-  res.status(404).json({message:`invalid path /api/orders${req.path}`});
-})
-
-router.use(errorHandler);
   
 module.exports = router;

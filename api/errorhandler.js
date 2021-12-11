@@ -6,4 +6,4 @@ const errorHandler = (err, req, res, next) => { // eslint-disable-line
     })
   };
 
-  module.exports = errorHandler;
+  module.exports = {errorHandler};
